@@ -23,14 +23,17 @@ type (
 	apiPath  string
 )
 
+// Теги именно yaml: конфиг разбирается по ним. С прежними cfg-тегами ключи
+// price_avia/price_sea не сопоставлялись с полями, ставки доставки оставались
+// нулевыми, и PriceForUser не добавлял стоимость доставки по весу.
 type Config struct {
-	Token string `cfg:"token"`
-	// Proto       string        `cfg:"proto"`
-	Host        string        `cfg:"host"`
-	Timeout     time.Duration `cfg:"timeout"`
-	PriceAvia   float64       `cfg:"price_avia"`
-	PriceSea    float64       `cfg:"price_sea"`
-	PriceVolume float64       `cfg:"price_volume"`
+	Token string `yaml:"token"`
+	// Proto       string        `yaml:"proto"`
+	Host        string        `yaml:"host"`
+	Timeout     time.Duration `yaml:"timeout"`
+	PriceAvia   float64       `yaml:"price_avia"`
+	PriceSea    float64       `yaml:"price_sea"`
+	PriceVolume float64       `yaml:"price_volume"`
 	// PartnerWarehouses — priceLogo складов, у которых мы можем заказать деталь
 	// напрямую, минуя Техномир. Админу такие позиции в корзине ТМ подсвечиваются
 	// подсказкой, чтобы он решил, оформлять через ТМ или напрямую.
@@ -50,6 +53,13 @@ func DefaultConfig() *Config {
 		PriceVolume:       PRICE_VOLUME,
 		PartnerWarehouses: []string{DEFAULT_PARTNER_WAREHOUSE},
 	}
+}
+
+// WithDefaults проставляет значения по умолчанию незаданным параметрам.
+// Вызывается при проверке общего конфига приложения: роутер и фоновые сервисы
+// считают цену через cfg.Tehnomir.PriceForUser, а не через копию в Client.
+func (c Config) WithDefaults() Config {
+	return overrideConfig(c)
 }
 
 func overrideConfig(cfg Config) Config {
