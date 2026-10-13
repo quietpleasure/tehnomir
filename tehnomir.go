@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"time"
 
-	"avtodetali/pkg/utilits"
+	"github.com/quietpleasure/utilits"
 )
 
 var ErrBadResponse error = fmt.Errorf("bad response")
