@@ -1,0 +1,4 @@
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/quietpleasure/utilits v0.0.0-20261013103357-44daecae74db h1:wzkEfoekuRODj+j4kCN3RZvMQRSqNCDwUVWg6jG8UKE=
+github.com/quietpleasure/utilits v0.0.0-20261013103357-44daecae74db/go.mod h1:34Ziq2EhBY523Hwj5Xqjfy1qfju3o61dTp3n1tweQzQ=
